@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller("/api/user")
-public class UserController {
+public class TeamUserController {
 
     @GetMapping("/getUser/{id}")
     public TeamUser getUser() {
