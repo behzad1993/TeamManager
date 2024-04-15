@@ -1,14 +1,16 @@
 package one.behzad.teammanager.features;
 
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
-import java.io.Serializable;
+import java.util.Optional;
 
-public interface BaseRepository<T, ID extends Serializable> extends Repository<T, ID> {
-    T findOne(ID id);
+@NoRepositoryBean
+public interface BaseRepository<T, ID> extends Repository<T, ID> {
+    Optional<T> findById(ID id);
 
-    T saveOne(T entity);
+    void save(T entity);
 
-    T deleteOne(ID id);
+    void deleteById(ID id);
 }
 
