@@ -1,22 +1,15 @@
 package one.behzad.teammanager.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.File;
-import java.util.UUID;
 
 @Entity
-//@Table(name = "team_user")
 @Data
-public class TeamUser {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private UUID id;
+@EqualsAndHashCode(callSuper = true)
+public class TeamUser extends BaseEntity {
 
     private String surName;
     private String lastName;

@@ -2,15 +2,13 @@ package one.behzad.teammanager.features.teamUser;
 
 import one.behzad.teammanager.models.TeamUser;
 
-import java.util.UUID;
-
 public interface TeamUserService {
 
-    TeamUser findTeamUser(UUID id);
+    TeamUser findTeamUser(Long id);
 
     void createTeamUser(TeamUser user);
 
-    void deleteTeamUser(UUID id);
+    void deleteTeamUser(Long id);
 
-    void updateUser(UUID id, TeamUser user);
+    void updateUser(TeamUser user);
 }

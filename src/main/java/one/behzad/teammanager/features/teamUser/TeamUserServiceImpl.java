@@ -4,8 +4,6 @@ import one.behzad.teammanager.models.TeamUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class TeamUserServiceImpl implements TeamUserService {
 
@@ -17,7 +15,7 @@ public class TeamUserServiceImpl implements TeamUserService {
     }
 
     @Override
-    public TeamUser findTeamUser(UUID id) {
+    public TeamUser findTeamUser(Long id) {
         return this.repository.findById(id).isPresent() ? this.repository.findById(id).get() : null;
     }
 
@@ -27,12 +25,12 @@ public class TeamUserServiceImpl implements TeamUserService {
     }
 
     @Override
-    public void deleteTeamUser(UUID id) {
+    public void deleteTeamUser(Long id) {
         this.repository.deleteById(id);
     }
 
     @Override
-    public void updateUser(UUID id, TeamUser user) {
-
+    public void updateUser(TeamUser user) {
+        this.repository.save(user);
     }
 }
