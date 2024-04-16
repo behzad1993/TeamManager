@@ -2,6 +2,8 @@ package one.behzad.teammanager.features.teamUser;
 
 import one.behzad.teammanager.models.TeamUser;
 
+import java.util.Map;
+
 public interface TeamUserService {
 
     TeamUser findTeamUser(Long id);
@@ -10,5 +12,5 @@ public interface TeamUserService {
 
     void deleteTeamUser(Long id);
 
-    void updateUser(TeamUser user);
+    String updateTeamUser(long id, Map<String, String> toPatch);
 }
