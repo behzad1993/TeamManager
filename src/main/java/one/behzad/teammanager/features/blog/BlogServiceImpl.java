@@ -1,39 +1,24 @@
 package one.behzad.teammanager.features.blog;
 
+import one.behzad.teammanager.features.BaseRepository;
 import one.behzad.teammanager.features.BaseService;
-import one.behzad.teammanager.models.Blog;
+import one.behzad.teammanager.features.BaseServiceImpl;
+import one.behzad.teammanager.models.fileDB.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-
 @Service
-public class BlogServiceImpl implements BaseService<Blog> {
+public class BlogServiceImpl extends BaseServiceImpl<Blog> implements BaseService<Blog> {
 
     private final BlogRepository repository;
 
     @Autowired
-    public BlogServiceImpl(BlogRepository repository) {
+    BlogServiceImpl(BlogRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public Blog find(Long id) {
-        return this.repository.findById(id).isPresent() ? this.repository.findById(id).get() : null;
-    }
-
-    @Override
-    public void insert(Blog blog) {
-        this.repository.save(blog);
-    }
-
-    @Override
-    public void delete(Long id) {
-        this.repository.deleteById(id);
-    }
-
-    @Override
-    public String update(Long id, Map<String, String> map) {
-        return "";
+    protected BaseRepository<Blog, Long> getRepository() {
+        return this.repository;
     }
 }
