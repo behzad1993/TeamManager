@@ -1,16 +1,19 @@
 package one.behzad.teammanager.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import one.behzad.teammanager.models.fileDB.MediaDB;
+import jakarta.persistence.ManyToMany;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Album extends BaseEntity {
+@Data
+class Album extends BaseEntity {
 
     private String name;
 
-    @OneToMany
+    @ManyToMany
     private List<MediaDB> mediaDBList;
 }

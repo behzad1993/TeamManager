@@ -1,4 +1,4 @@
-package one.behzad.teammanager.models.fileDB;
+package one.behzad.teammanager.models;
 
 import jakarta.persistence.Entity;
 import lombok.Data;

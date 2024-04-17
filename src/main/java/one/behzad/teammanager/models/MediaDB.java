@@ -1,14 +1,15 @@
 package one.behzad.teammanager.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-class Team extends BaseEntity {
+class MediaDB extends FileDB {
 
-    private String name;
-    private FileDB profilePicture;
+    @ManyToOne
+    private Album albumName;
 }

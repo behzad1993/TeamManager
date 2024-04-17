@@ -5,7 +5,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import one.behzad.teammanager.models.fileDB.FileDB;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +16,7 @@ public class TeamUser extends BaseEntity {
 
     private Role role;
 
+    // TODO: different Team, different role. Needs to be considered
     @OneToMany
     private List<Team> team;
     private String surName;

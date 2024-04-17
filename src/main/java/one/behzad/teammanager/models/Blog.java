@@ -1,11 +1,10 @@
-package one.behzad.teammanager.models.fileDB;
+package one.behzad.teammanager.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import one.behzad.teammanager.models.BaseEntity;
 
 import java.util.List;
 
@@ -24,5 +23,5 @@ public class Blog extends BaseEntity {
     private List<FileDB> fileDBList;
 
     @ManyToMany
-    private List<ImageDB> mediaDBList;
+    private List<MediaDB> mediaDBList;
 }

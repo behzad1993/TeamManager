@@ -1,4 +1,4 @@
-package one.behzad.teammanager.models.fileDB;
+package one.behzad.teammanager.models;
 
 import jakarta.persistence.Entity;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ImageDB extends MediaDB {
+public class GifDB extends MediaDB {
 
-    private MediaType type = MediaType.IMAGE;
+    private MediaType type = MediaType.GIF;
 }
