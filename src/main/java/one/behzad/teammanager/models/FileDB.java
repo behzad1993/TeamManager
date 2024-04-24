@@ -1,18 +1,19 @@
-package one.behzad.teammanager.models;
-
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-@Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
-class FileDB extends BaseEntity {
-
-    @Lob
-    byte[] data;
-    private String name;
-    private String mimeType;
-}
+//package one.behzad.teammanager.models;
+//
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//
+//@Getter
+//@Entity
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn
+//@AllArgsConstructor
+//@NoArgsConstructor
+//public class FileDB extends BaseEntity {
+//
+//    @Lob
+//    byte[] data;
+//    private String name;
+//}

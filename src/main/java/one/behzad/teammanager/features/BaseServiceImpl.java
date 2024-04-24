@@ -1,6 +1,6 @@
 package one.behzad.teammanager.features;
 
-import one.behzad.teammanager.models.TeamUser;
+import one.behzad.teammanager.models.Member;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -40,7 +40,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
         T o = this.find(id);
         for (String k : toPatch.keySet()) {
-            Field field = ReflectionUtils.findField(TeamUser.class, k);
+            Field field = ReflectionUtils.findField(Member.class, k);
             if (field == null) {
                 return "field does not exists in object";
             }

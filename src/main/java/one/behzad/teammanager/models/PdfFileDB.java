@@ -5,7 +5,6 @@
 //
 //@Entity
 //@Getter
-//public class ClipDB extends MediaDB {
+//public class PdfFileDB extends FileDB {
 //
-//    private MediaType type = MediaType.CLIP;
 //}

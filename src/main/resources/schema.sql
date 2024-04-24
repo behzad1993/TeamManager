@@ -1,0 +1,28 @@
+DROP TABLE IF EXISTS member;
+
+CREATE TABLE member
+(
+	id        INT         NOT NULL auto_increment,
+	birthday  DATE        NOT NULL,
+	email     VARCHAR(20) NOT NULL,
+	sur_name  VARCHAR(20) NOT NULL,
+	last_name VARCHAR(20) NOT NULL,
+	phone_nr  VARCHAR(20) NOT NULL
+);
+
+DROP TABLE IF EXISTS member_team;
+
+CREATE TABLE member_team
+(
+	member_id INT NOT NULL,
+	team_id   INT NOT NULL
+);
+
+DROP TABLE IF EXISTS team;
+
+CREATE TABLE team
+(
+	id   INT         NOT NULL auto_increment,
+	name VARCHAR(20) NOT NULL
+);
+
