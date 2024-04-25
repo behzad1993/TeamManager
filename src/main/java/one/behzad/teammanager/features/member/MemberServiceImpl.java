@@ -1,4 +1,4 @@
-package one.behzad.teammanager.features.teamUser;
+package one.behzad.teammanager.features.member;
 
 import one.behzad.teammanager.features.BaseRepository;
 import one.behzad.teammanager.features.BaseService;
@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TeamUserServiceImpl extends BaseServiceImpl<Member> implements BaseService<Member> {
+public class MemberServiceImpl extends BaseServiceImpl<Member> implements BaseService<Member> {
 
-    private final TeamUserRepository repository;
+    private final MemberRepository repository;
 
     @Autowired
-    public TeamUserServiceImpl(TeamUserRepository repository) {
+    public MemberServiceImpl(MemberRepository repository) {
         this.repository = repository;
     }
 

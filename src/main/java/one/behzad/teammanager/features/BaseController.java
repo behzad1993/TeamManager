@@ -25,6 +25,7 @@ public abstract class BaseController<T> {
             @ApiResponse(responseCode = "404", description = "TeamUser not found",
                     content = @Content)})
     public T get(@PathVariable Long id) {
+        System.out.println("get request with id: " + id);
         return this.getService().find(id);
     }
 

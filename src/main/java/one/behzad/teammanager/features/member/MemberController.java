@@ -1,4 +1,4 @@
-package one.behzad.teammanager.features.teamUser;
+package one.behzad.teammanager.features.member;
 
 import one.behzad.teammanager.features.BaseController;
 import one.behzad.teammanager.features.BaseService;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("user")
-public class TeamUserController extends BaseController<Member> {
+public class MemberController extends BaseController<Member> {
 
-    private final TeamUserServiceImpl service;
+    private final MemberServiceImpl service;
 
     @Autowired
-    public TeamUserController(TeamUserServiceImpl service) {
+    public MemberController(MemberServiceImpl service) {
         this.service = service;
     }
 
