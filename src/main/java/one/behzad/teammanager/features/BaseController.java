@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import one.behzad.teammanager.models.Member;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 public abstract class BaseController<T> {
@@ -27,6 +28,11 @@ public abstract class BaseController<T> {
     public T get(@PathVariable Long id) {
         System.out.println("get request with id: " + id);
         return this.getService().find(id);
+    }
+
+    @GetMapping("/getAll")
+    public List<T> getAll() {
+        return this.getService().findAll();
     }
 
     @PostMapping("/create")

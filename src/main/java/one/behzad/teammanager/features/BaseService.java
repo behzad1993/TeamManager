@@ -1,8 +1,11 @@
 package one.behzad.teammanager.features;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BaseService<T> {
+
+    List<T> findAll();
 
     T find(Long id);
 

@@ -5,12 +5,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     protected abstract BaseRepository<T, Long> getRepository();
+
+    @Override
+    public List<T> findAll() {
+        return this.getRepository().findAll();
+    }
 
     @Override
     public T find(Long id) {
