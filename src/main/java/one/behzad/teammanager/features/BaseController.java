@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseController<T> {
+public abstract class BaseController<T, DTO> {
 
-    protected abstract BaseService<T> getService();
+    protected abstract BaseService<T, DTO> getService();
 
     @GetMapping("/get/{id}")
     @Operation(summary = "Get a book by its id")
@@ -25,18 +25,18 @@ public abstract class BaseController<T> {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "TeamUser not found",
                     content = @Content)})
-    public T get(@PathVariable Long id) {
+    public DTO get(@PathVariable Long id) {
         System.out.println("get request with id: " + id);
         return this.getService().find(id);
     }
 
     @GetMapping("/getAll")
-    public List<T> getAll() {
+    public List<DTO> getAll() {
         return this.getService().findAll();
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody T o) {
+    public void create(@RequestBody DTO o) {
         this.getService().insert(o);
     }
 

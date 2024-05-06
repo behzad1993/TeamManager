@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @MappedSuperclass
-class BaseEntity {
+public class BaseEntity {
 
     @Id
     @GeneratedValue(generator = "sequence-generator")

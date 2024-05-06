@@ -41,6 +41,11 @@ public class Member extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
     private Set<Team> teamSet;
 
+    public Member(String a, String a1) {
+        this.surName = a;
+        this.lastName = a1;
+    }
+
 //    private Date joinDate;
 //    private Date leaveDate;
 //    private String street;

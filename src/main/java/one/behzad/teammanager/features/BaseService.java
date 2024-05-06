@@ -3,13 +3,13 @@ package one.behzad.teammanager.features;
 import java.util.List;
 import java.util.Map;
 
-public interface BaseService<T> {
+public interface BaseService<T, DTO> {
 
-    List<T> findAll();
+    List<DTO> findAll();
 
-    T find(Long id);
+    DTO find(Long id);
 
-    void insert(T o);
+    void insert(DTO o);
 
     void delete(Long id);
 
