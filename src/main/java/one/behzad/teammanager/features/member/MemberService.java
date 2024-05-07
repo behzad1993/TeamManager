@@ -1,19 +1,20 @@
-//package one.behzad.teammanager.features.teamUser;
-//
-//import one.behzad.teammanager.features.BaseService;
-//import one.behzad.teammanager.models.TeamUser;
-//
-//import java.util.Map;
-//
-//public interface TeamUserService extends BaseService<TeamUser, Long> {
-//
-//    @Override
-//    TeamUser findTeamUser(Long id);
-//
-//    void createTeamUser(TeamUser user);
-//
-//    @Override
-//    void deleteTeamUser(Long id);
-//
-//    String updateTeamUser(long id, Map<String, String> toPatch);
-//}
+package one.behzad.teammanager.features.member;
+
+import one.behzad.teammanager.DTOs.MemberDTO;
+import one.behzad.teammanager.models.Member;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+public interface MemberService {
+    Optional<Member> findOneById(Long id);
+
+    List<MemberDTO> findAll();
+
+    Member save(Member member);
+
+    void delete(Long id);
+
+    boolean update(Long id, Map<String, String> map);
+}

@@ -13,14 +13,13 @@ import java.util.Map;
 
 public abstract class BaseController<T, DTO> {
 
-    protected abstract BaseService<T, DTO> getService();
+    abstract BaseService<T, DTO> getService();
 
     @GetMapping("/get/{id}")
     @Operation(summary = "Get a book by its id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the TeamUser",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Member.class))}),
+            @ApiResponse(responseCode = "200", description = "Found the TeamUser", content = {@Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Member.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "TeamUser not found",

@@ -1,16 +1,14 @@
 package one.behzad.teammanager.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = false)
 @Entity
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -41,9 +39,15 @@ public class Member extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
     private Set<Team> teamSet;
 
-    public Member(String a, String a1) {
+    public Member(long i, String a, String b) {
+        this.id = i;
         this.surName = a;
-        this.lastName = a1;
+        this.lastName = b;
+    }
+
+    public Member(String a, String b) {
+        this.surName = a;
+        this.lastName = b;
     }
 
 //    private Date joinDate;
