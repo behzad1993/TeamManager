@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,13 +44,20 @@ public class MemberController {
 
     @GetMapping("/users")
     public ResponseEntity<List<MemberDTO>> getAll() {
-        List<MemberDTO> memberDTOs = this.service.findAll();
+        List<Member> members = this.service.findAll();
 
-        if (memberDTOs.isEmpty()) {
+        if (members.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok().body(memberDTOs);
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+
+        for (Member member : members) {
+            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
+            memberDTOS.add(memberDTO);
+        }
+
+        return ResponseEntity.ok().body(memberDTOS);
     }
 
 
