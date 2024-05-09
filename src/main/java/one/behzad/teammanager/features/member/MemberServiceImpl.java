@@ -29,15 +29,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> findAll() {
         return this.repository.findAll();
-        //        Iterable<Member> members = this.repository.findAll();
-//        List<MemberDTO> memberDTOs = new ArrayList<>();
-//
-//        for (Member member : members) {
-//            MemberDTO mappedMemberDTO = this.modelMapper.map(member, MemberDTO.class);
-//            memberDTOs.add(mappedMemberDTO);
-//        }
-//
-//        return memberDTOs;
     }
 
     @Override

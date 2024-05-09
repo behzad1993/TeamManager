@@ -19,7 +19,6 @@ import java.util.Optional;
 public class MemberController {
 
     private final MemberService service;
-
     private final ModelMapper modelMapper;
 
     @Autowired

@@ -6,13 +6,16 @@ import one.behzad.teammanager.models.Team;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TeamService {
     Optional<Team> findOneById(Long id);
 
     List<Team> findAll();
 
-    Member save(Member member);
+    Set<Member> findAllMembersByTeam(Long id);
+
+    Team save(Team member);
 
     void delete(Long id);
 
