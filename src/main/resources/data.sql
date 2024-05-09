@@ -1,9 +1,9 @@
-INSERT INTO team (id, name)
-VALUES (1, 'Jungmaster');
-INSERT INTO team (id, name)
-VALUES (2, 'Kinder');
-INSERT INTO team (id, name)
-VALUES (3, 'Jugend');
+INSERT INTO team (id, name, sports)
+VALUES (1, 'Jungmaster', 'swimming');
+INSERT INTO team (id, name, sports)
+VALUES (2, 'Kinder', 'swimming');
+INSERT INTO team (id, name, sports)
+VALUES (3, 'Jugend', 'swimming');
 
 INSERT INTO member (birthday, id, email, last_name, phone_nr, sur_name)
 VALUES ('1993-03-16', 1, 'karimi1993@live.de', 'Karimi', '0176 666 777 888', 'Behzad');

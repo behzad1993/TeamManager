@@ -1,14 +1,11 @@
 package one.behzad.teammanager.features.member;
 
-import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.models.Member;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,12 +14,10 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository repository;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public MemberServiceImpl(MemberRepository repository, ModelMapper modelMapper) {
+    public MemberServiceImpl(MemberRepository repository) {
         this.repository = repository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -32,16 +27,17 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public List<MemberDTO> findAll() {
-        Iterable<Member> members = this.repository.findAll();
-        List<MemberDTO> memberDTOs = new ArrayList<>();
-
-        for (Member member : members) {
-            MemberDTO mappedMemberDTO = this.modelMapper.map(member, MemberDTO.class);
-            memberDTOs.add(mappedMemberDTO);
-        }
-
-        return memberDTOs;
+    public List<Member> findAll() {
+        return this.repository.findAll();
+        //        Iterable<Member> members = this.repository.findAll();
+//        List<MemberDTO> memberDTOs = new ArrayList<>();
+//
+//        for (Member member : members) {
+//            MemberDTO mappedMemberDTO = this.modelMapper.map(member, MemberDTO.class);
+//            memberDTOs.add(mappedMemberDTO);
+//        }
+//
+//        return memberDTOs;
     }
 
     @Override

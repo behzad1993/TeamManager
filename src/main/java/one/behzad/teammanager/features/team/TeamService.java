@@ -1,15 +1,16 @@
-package one.behzad.teammanager.features.member;
+package one.behzad.teammanager.features.team;
 
 import one.behzad.teammanager.models.Member;
+import one.behzad.teammanager.models.Team;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface MemberService {
-    Optional<Member> findOneById(Long id);
+public interface TeamService {
+    Optional<Team> findOneById(Long id);
 
-    List<Member> findAll();
+    List<Team> findAll();
 
     Member save(Member member);
 

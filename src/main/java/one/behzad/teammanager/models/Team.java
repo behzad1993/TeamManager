@@ -1,10 +1,7 @@
 package one.behzad.teammanager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +14,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-class Team extends BaseEntity {
+@Table(name = "team")
+public class Team extends BaseEntity {
 
     private String name;
 
@@ -26,9 +24,11 @@ class Team extends BaseEntity {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "teamSet")
+            mappedBy = "teams")
     @JsonIgnore
-    private Set<Member> memberList;
+    private Set<Member> members;
+
+    private String sports;
 
 //    @OneToOne
 //    private ImageDB profilePicture;

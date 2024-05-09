@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "member")
 public class Member extends BaseEntity {
 
     // TODO: different Team, different role. Needs to be considered
@@ -35,9 +36,9 @@ public class Member extends BaseEntity {
                     CascadeType.MERGE
             })
     @JoinTable(name = "member_team",
-            joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
-    private Set<Team> teamSet;
+            joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
+    private Set<Team> teams;
 
     public Member(long i, String a, String b) {
         this.id = i;
