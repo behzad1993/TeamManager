@@ -11,6 +11,6 @@ import lombok.Getter;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 }

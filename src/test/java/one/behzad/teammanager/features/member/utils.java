@@ -15,6 +15,14 @@ class utils {
         return new Member("a", "b");
     }
 
+    static MemberDTO createMemberDTO() {
+        return new MemberDTO("a", "b");
+    }
+
+    static MemberDTO createMemberDTOFalse() {
+        return new MemberDTO("a", null);
+    }
+
     static ArrayList<Member> createMembers(int times) {
         ArrayList<Member> members = new ArrayList<>();
         for (int i = 0; i < times; i++) {

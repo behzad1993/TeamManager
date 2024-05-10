@@ -2,22 +2,21 @@ package one.behzad.teammanager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "team")
 public class Team extends BaseEntity {
 
     private String name;
+    private String sports;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -26,9 +25,7 @@ public class Team extends BaseEntity {
             },
             mappedBy = "teams")
     @JsonIgnore
-    private Set<Member> members;
-
-    private String sports;
+    private List<Member> members;
 
 //    @OneToOne
 //    private ImageDB profilePicture;

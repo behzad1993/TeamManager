@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.models.Member;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class MemberController {
     public MemberController(MemberService service, ModelMapper modelMapper) {
         this.service = service;
         this.modelMapper = modelMapper;
+        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
 
 
@@ -65,6 +67,19 @@ public class MemberController {
         Member mappedMember = this.modelMapper.map(memberDTO, Member.class);
         this.service.save(mappedMember);
         return ResponseEntity.status(HttpStatus.CREATED).body(memberDTO);
+    }
+
+
+    @PostMapping("/save2")
+    public ResponseEntity<Member> addMember(@RequestBody Member member) {
+        this.service.save(member);
+        return ResponseEntity.status(HttpStatus.CREATED).body(member);
+    }
+
+    @GetMapping("/get2/{id}")
+    public ResponseEntity<Member> getMember(@PathVariable Long id) {
+        Member member = this.service.findOneById(id).get();
+        return ResponseEntity.status(HttpStatus.CREATED).body(member);
     }
 
 

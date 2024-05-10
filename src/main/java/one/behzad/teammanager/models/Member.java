@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Entity
@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "member")
 public class Member extends BaseEntity {
 
@@ -38,7 +39,7 @@ public class Member extends BaseEntity {
     @JoinTable(name = "member_team",
             joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
-    private Set<Team> teams;
+    private List<Team> teams;
 
     public Member(long i, String a, String b) {
         this.id = i;

@@ -5,12 +5,17 @@ import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.DTOs.TeamDTO;
 import one.behzad.teammanager.models.Member;
 import one.behzad.teammanager.models.Team;
+import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("team")
@@ -22,12 +27,17 @@ public class TeamController {
     public TeamController(TeamService service, ModelMapper modelMapper) {
         this.service = service;
         this.modelMapper = modelMapper;
+        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+//        this.modelMapper.typeMap(Team.class, TeamDTO.class)
+//                .addMappings(mapper -> mapper.using(this.getListListAbstractConverter())
+//                        .map(Team::getMembers, TeamDTO::setMemberDTOs));
     }
 
     @GetMapping("{id}")
     @Operation(summary = "Get Team by ID")
     public ResponseEntity<TeamDTO> findOneById(@PathVariable Long id) {
         Optional<Team> team = this.service.findOneById(id);
+
 
         return team.map(t -> {
                     TeamDTO mappedDTO = this.modelMapper.map(t, TeamDTO.class);
@@ -46,7 +56,6 @@ public class TeamController {
         }
 
         List<TeamDTO> teamDTOS = new ArrayList<>();
-
         for (Team team : teams) {
             TeamDTO teamDTO = this.modelMapper.map(team, TeamDTO.class);
             teamDTOS.add(teamDTO);
@@ -55,10 +64,20 @@ public class TeamController {
         return ResponseEntity.ok().body(teamDTOS);
     }
 
+    private AbstractConverter<List<Member>, List<MemberDTO>> getListListAbstractConverter() {
+        return new AbstractConverter<>() {
+            @Override
+            protected List<MemberDTO> convert(List<Member> members) {
+                return members.stream().map(member -> TeamController.this.modelMapper.map(member, MemberDTO.class))
+                        .toList();
+            }
+        };
+    }
 
-    @GetMapping("/{id}/members")
-    public ResponseEntity<List<MemberDTO>> getAllMembersOfTeam(@RequestBody Long id) {
-        Set<Member> members = this.service.findAllMembersByTeam(id);
+
+    @GetMapping("/members/{id}")
+    public ResponseEntity<List<MemberDTO>> getAllMembersOfTeam(@PathVariable Long id) {
+        List<Member> members = this.service.findAllMembersByTeam(id);
 
         if (members.isEmpty()) {
             return ResponseEntity.notFound().build();

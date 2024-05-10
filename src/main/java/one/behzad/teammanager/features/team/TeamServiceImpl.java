@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -30,12 +33,12 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Set<Member> findAllMembersByTeam(Long id) {
+    public List<Member> findAllMembersByTeam(Long id) {
         Optional<Team> teamOpt = this.findOneById(id);
         if (teamOpt.isPresent()) {
             return teamOpt.get().getMembers();
         }
-        return new HashSet<>();
+        return new ArrayList<>();
     }
 
     @Override
