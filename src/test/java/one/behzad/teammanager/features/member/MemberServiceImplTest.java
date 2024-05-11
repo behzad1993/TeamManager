@@ -138,4 +138,19 @@ class MemberServiceImplTest {
         // THEN
         assertThat(actual).isTrue();
     }
+
+    @Test
+    void update_shouldReturnFalseIfKeyDoesNotExistAsField() {
+        // GIVEN
+        long id = 1L;
+
+        // WHEN
+        when(this.repository.findById(id)).thenReturn(Optional.of(createMember(id)));
+        Map<String, String> toPatchCopy = Map.of("id", String.valueOf(id), "notExisting", "name");
+        HashMap<String, String> toPatch = new HashMap<>(toPatchCopy);
+        boolean actual = this.service.update(id, toPatch);
+
+        // THEN
+        assertThat(actual).isFalse();
+    }
 }
