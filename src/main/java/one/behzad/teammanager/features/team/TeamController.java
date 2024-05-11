@@ -27,10 +27,13 @@ public class TeamController {
     public TeamController(TeamService service, ModelMapper modelMapper) {
         this.service = service;
         this.modelMapper = modelMapper;
-        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//        this.modelMapper.typeMap(Team.class, TeamDTO.class)
-//                .addMappings(mapper -> mapper.using(this.getListListAbstractConverter())
-//                        .map(Team::getMembers, TeamDTO::setMemberDTOs));
+        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        this.modelMapper.typeMap(Team.class, TeamDTO.class)
+                .addMappings(mapper -> mapper.using(this.getMemberToMemberDTOConverter())
+                        .map(Team::getMembers, TeamDTO::setMemberDTOs));
+        this.modelMapper.typeMap(TeamDTO.class, Team.class)
+                .addMappings(mapper -> mapper.using(this.getMemberDTOtoMemberConverter())
+                        .map(TeamDTO::getMemberDTOs, Team::setMembers));
     }
 
     @GetMapping("{id}")
@@ -64,11 +67,22 @@ public class TeamController {
         return ResponseEntity.ok().body(teamDTOS);
     }
 
-    private AbstractConverter<List<Member>, List<MemberDTO>> getListListAbstractConverter() {
+    // TODO go for generics
+    private AbstractConverter<List<Member>, List<MemberDTO>> getMemberToMemberDTOConverter() {
         return new AbstractConverter<>() {
             @Override
             protected List<MemberDTO> convert(List<Member> members) {
                 return members.stream().map(member -> TeamController.this.modelMapper.map(member, MemberDTO.class))
+                        .toList();
+            }
+        };
+    }
+
+    private AbstractConverter<List<MemberDTO>, List<Member>> getMemberDTOtoMemberConverter() {
+        return new AbstractConverter<>() {
+            @Override
+            protected List<Member> convert(List<MemberDTO> memberDTOs) {
+                return memberDTOs.stream().map(member -> TeamController.this.modelMapper.map(member, Member.class))
                         .toList();
             }
         };
