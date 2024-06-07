@@ -1,7 +1,6 @@
 package one.behzad.teammanager.features.member;
 
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.models.Member;
 import org.modelmapper.ModelMapper;
@@ -64,7 +63,7 @@ public class MemberController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<MemberDTO> addMember(@Valid @RequestBody MemberDTO memberDTO) {
+    public ResponseEntity<MemberDTO> addMember(@RequestBody MemberDTO memberDTO) {
         Member mappedMember = this.modelMapper.map(memberDTO, Member.class);
         this.service.save(mappedMember);
         return ResponseEntity.status(HttpStatus.CREATED).body(memberDTO);

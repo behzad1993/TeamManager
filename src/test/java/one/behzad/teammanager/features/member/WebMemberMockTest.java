@@ -65,6 +65,7 @@ class WebMemberMockTest {
         String content = this.objectMapper.writeValueAsString(memberDTO);
         System.out.println(content);
         content = "{\"surName\":null,\"lastName\":\"b\",\"email\":null,\"phoneNr\":null,\"birthday\":null}\n";
+        content = "{\"surName\":\"\",\"lastName\":\"b\",\"email\":null,\"phoneNr\":null,\"birthday\":null}\n";
         System.out.println(content);
         this.mockMvc.perform(post("/user/save")
                         .contentType(MediaType.APPLICATION_JSON)
