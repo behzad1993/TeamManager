@@ -37,12 +37,12 @@ class utils {
         Member tmp2 = new Member(2L, "b", "b");
         Member tmp3 = new Member(3L, "c", "c");
         Member tmp4 = new Member(4L, "d", "d");
-        ArrayList<Member> memberDTOS = new ArrayList<>();
-        memberDTOS.add(tmp1);
-        memberDTOS.add(tmp2);
-        memberDTOS.add(tmp3);
-        memberDTOS.add(tmp4);
-        return memberDTOS;
+        ArrayList<Member> members = new ArrayList<>();
+        members.add(tmp1);
+        members.add(tmp2);
+        members.add(tmp3);
+        members.add(tmp4);
+        return members;
     }
 
 

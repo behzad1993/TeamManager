@@ -70,19 +70,6 @@ public class MemberController {
     }
 
 
-    @PostMapping("/save2")
-    public ResponseEntity<Member> addMember(@RequestBody Member member) {
-        this.service.save(member);
-        return ResponseEntity.status(HttpStatus.CREATED).body(member);
-    }
-
-    @GetMapping("/get2/{id}")
-    public ResponseEntity<Member> getMember(@PathVariable Long id) {
-        Member member = this.service.findOneById(id).get();
-        return ResponseEntity.status(HttpStatus.CREATED).body(member);
-    }
-
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> remove(@PathVariable Long id) {
         this.service.delete(id);
