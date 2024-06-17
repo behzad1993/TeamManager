@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class WebMemberMockSaveMemberTest {
 
+    private final String path = "/user/save";
     @Autowired
     private MockMvc mockMvc;
 
@@ -44,9 +45,7 @@ class WebMemberMockSaveMemberTest {
     @ParameterizedTest
     @ValueSource(strings = {"{}", "{ }", "{ \"invalid\":\"invalid\" }"})
     void httpRequestMatching_whenValidJsonReturn_Return201(String validInput) throws Exception {
-
-        System.out.println(("http"));
-        this.mockMvc.perform(post("/user/save")
+        this.mockMvc.perform(post(this.path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(validInput))
                 .andExpect(status().isCreated());
@@ -58,7 +57,7 @@ class WebMemberMockSaveMemberTest {
     @ValueSource(strings = {"", "  ", "{", "}", "{ invalid:invalid }"})
     void httpRequestMatching_whenInvalidJsonReturn_Return400(String invalidInput) throws Exception {
 
-        this.mockMvc.perform(post("/user/save")
+        this.mockMvc.perform(post(this.path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invalidInput))
                 .andExpect(status().isBadRequest());
@@ -69,7 +68,7 @@ class WebMemberMockSaveMemberTest {
     @Order(3)
     @Test
     void inputDeserialization_whenValidMemberDTO_mappedCorrectlyToMember() throws Exception {
-        this.mockMvc.perform(post("/user/save")
+        this.mockMvc.perform(post(this.path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(createMemberDTO())))
                 .andExpect(status().isCreated());
@@ -81,16 +80,17 @@ class WebMemberMockSaveMemberTest {
     @Order(4)
     @Test
     void logic_whenValidInput_serviceReceivedCorrectMember() throws Exception {
-        System.out.println("logic");
         MemberDTO memberDTO = createMemberDTO();
 
-        this.mockMvc.perform(post("/user/save")
+        this.mockMvc.perform(post(this.path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(memberDTO)))
                 .andExpect(status().isCreated());
 
         ArgumentCaptor<Member> memberCaptor = ArgumentCaptor.forClass(Member.class);
+
         verify(this.memberService, times(1)).save(memberCaptor.capture());
+
         assertThat(memberCaptor.getValue().getSurName()).isEqualTo(memberDTO.getSurName());
         assertThat(memberCaptor.getValue().getLastName()).isEqualTo(memberDTO.getLastName());
     }
@@ -102,7 +102,7 @@ class WebMemberMockSaveMemberTest {
     void output_whenValidInput_returnMappedMemberDTO() throws Exception {
         MemberDTO memberDTO = createMemberDTO();
 
-        MvcResult mvcResult = this.mockMvc.perform(post("/user/save")
+        MvcResult mvcResult = this.mockMvc.perform(post(this.path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(memberDTO)))
                 .andReturn();

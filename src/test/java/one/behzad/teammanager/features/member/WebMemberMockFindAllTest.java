@@ -36,20 +36,6 @@ class WebMemberMockFindAllTest {
 
 
     // 1. HTTP REQUEST MATCHING
-    @Order(1)
-    @Test
-    void httpRequestMatching_Return200() throws Exception {
-//        when(this.memberService.findAll()).thenReturn(List.of());
-//        MvcResult mvcResult = this.mockMvc.perform(get("/user/users/"))
-//                .andReturn();
-//        int actual = mvcResult.getResponse().getStatus();
-//        assertThat(actual).isLessThan(ERROR);
-
-        this.mockMvc.perform(get("/your-endpoint")) // Replace with your actual endpoint
-                .andReturn();
-    }
-
-
     // 2. INPUT DESERIALIZATION
     // 3. INPUT VALIDATION
     // 4. BUSINESS LOGIC

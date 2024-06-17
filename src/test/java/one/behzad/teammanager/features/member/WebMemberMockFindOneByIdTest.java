@@ -62,7 +62,6 @@ class WebMemberMockFindOneByIdTest {
     @ParameterizedTest
     @ValueSource(strings = {"  ", "{", "}", "ONE", "1L"})
     void httpRequestMatching_whenInvalidId_Return400(String invalidInput) throws Exception {
-        System.out.println("SEND: " + invalidInput);
         verify(this.memberService, times(0)).findOneById(anyLong());
         this.mockMvc.perform(get("/user/" + invalidInput)
                         .contentType(MediaType.APPLICATION_JSON))
