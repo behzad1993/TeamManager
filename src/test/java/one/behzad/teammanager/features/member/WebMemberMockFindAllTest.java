@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
-import static one.behzad.teammanager.features.member.utils.getMemberDTOs;
-import static one.behzad.teammanager.features.member.utils.getMembers;
+import static one.behzad.teammanager.features.member.UtilsMember.getMemberDTOs;
+import static one.behzad.teammanager.features.member.UtilsMember.getMembers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

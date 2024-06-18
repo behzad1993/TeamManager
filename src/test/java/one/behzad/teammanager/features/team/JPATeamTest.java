@@ -10,8 +10,8 @@ import org.springframework.test.context.TestPropertySource;
 import java.util.List;
 import java.util.Optional;
 
-import static one.behzad.teammanager.features.team.utilsTeam.createTeamWithoutMember;
-import static one.behzad.teammanager.features.team.utilsTeam.createTeamsWithoutMember;
+import static one.behzad.teammanager.features.team.UtilsTeam.createTeamWithoutMember;
+import static one.behzad.teammanager.features.team.UtilsTeam.createTeamsWithoutMember;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest

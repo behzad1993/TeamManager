@@ -9,8 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
-import static one.behzad.teammanager.features.member.utils.createMember;
-import static one.behzad.teammanager.features.member.utils.getMembers;
+import static one.behzad.teammanager.features.member.UtilsMember.createMember;
+import static one.behzad.teammanager.features.member.UtilsMember.getMembers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;

@@ -5,7 +5,7 @@ import one.behzad.teammanager.models.Member;
 
 import java.util.ArrayList;
 
-class utils {
+class UtilsMember {
 
     static Member createMember(long id) {
         return new Member(id, "a", "b");
