@@ -11,4 +11,10 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
 
     @Override
     List<Member> findAll();
+
+    // TODO: to test
+//    List<Member> findAllByMainStrokeFirst(Stroke stroke);
+
+    // TODO: to test
+//    List<Member> findAllByMainStrokeIsIMSwimmer(boolean isIMSwimmer);
 }

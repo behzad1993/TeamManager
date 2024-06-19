@@ -12,7 +12,14 @@ VALUES ('1993-03-16', 'karimi1993@live.de', 'Karimi', '0176 666 777 888', 'Behza
 	   ('1999-01-08', 'Ronja@live.de', 'Markgraf', '0173 666 777 888', 'Ronja'),
 	   ('2002-12-27', 'Mia@live.de', 'Goericke', '0174 666 777 888', 'Mia');
 
-
+INSERT INTO strokes (first, second, third, fourth)
+VALUES ('butterfly', 'backstroke', 'breaststroke', 'freestyle'),
+	   ('butterfly', 'backstroke', 'breaststroke', 'freestyle'),
+	   ('butterfly', 'backstroke', 'breaststroke', 'freestyle'),
+	   ('butterfly', 'backstroke', 'breaststroke', 'freestyle'),
+	   ('butterfly', 'backstroke', 'breaststroke', 'freestyle'),
+	   ('butterfly', 'backstroke', 'breaststroke', 'freestyle'),
+	   ('butterfly', 'backstroke', 'breaststroke', 'freestyle');
 
 INSERT INTO member_team (member_id, team_id)
 VALUES (1, 1),
@@ -26,3 +33,12 @@ VALUES (1, 1),
 	   (7, 1),
 	   (7, 2),
 	   (7, 3);
+
+-- INSERT INTO member_stroke (member_id, stroke_id)
+-- VALUES (1, 1),
+-- 	   (2, 2),
+-- 	   (3, 3),
+-- 	   (4, 4),
+-- 	   (5, 5),
+-- 	   (6, 6),
+-- 	   (7, 7);

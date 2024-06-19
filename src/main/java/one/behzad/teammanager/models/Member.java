@@ -41,6 +41,12 @@ public class Member extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
     private List<Team> teams;
 
+    @OneToOne
+    @JoinTable(name = "member_stroke",
+            joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "strokes_id", referencedColumnName = "id"))
+    private StrokeOrder mainStroke;
+
     public Member(long i, String a, String b) {
         this.id = i;
         this.surName = a;
