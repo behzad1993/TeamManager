@@ -5,9 +5,7 @@ import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.DTOs.TeamDTO;
 import one.behzad.teammanager.models.Member;
 import one.behzad.teammanager.models.Team;
-import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,23 +15,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static one.behzad.teammanager.utils.Mapper.getMapper;
+
 @RestController
 @RequestMapping("team")
 public class TeamController {
 
     private final TeamService service;
-    private final ModelMapper modelMapper;
 
     public TeamController(TeamService service, ModelMapper modelMapper) {
         this.service = service;
-        this.modelMapper = modelMapper;
-        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        this.modelMapper.typeMap(Team.class, TeamDTO.class)
-                .addMappings(mapper -> mapper.using(this.getMemberToMemberDTOConverter())
-                        .map(Team::getMembers, TeamDTO::setMemberDTOs));
-        this.modelMapper.typeMap(TeamDTO.class, Team.class)
-                .addMappings(mapper -> mapper.using(this.getMemberDTOtoMemberConverter())
-                        .map(TeamDTO::getMemberDTOs, Team::setMembers));
     }
 
     @GetMapping("{id}")
@@ -43,7 +34,7 @@ public class TeamController {
 
 
         return team.map(t -> {
-                    TeamDTO mappedDTO = this.modelMapper.map(t, TeamDTO.class);
+                    TeamDTO mappedDTO = getMapper().map(t, TeamDTO.class);
                     return ResponseEntity.ok().body(mappedDTO);
                 })
                 .orElse(ResponseEntity.notFound().build());
@@ -60,32 +51,11 @@ public class TeamController {
 
         List<TeamDTO> teamDTOS = new ArrayList<>();
         for (Team team : teams) {
-            TeamDTO teamDTO = this.modelMapper.map(team, TeamDTO.class);
+            TeamDTO teamDTO = getMapper().map(team, TeamDTO.class);
             teamDTOS.add(teamDTO);
         }
 
         return ResponseEntity.ok().body(teamDTOS);
-    }
-
-    // TODO go for generics
-    private AbstractConverter<List<Member>, List<MemberDTO>> getMemberToMemberDTOConverter() {
-        return new AbstractConverter<>() {
-            @Override
-            protected List<MemberDTO> convert(List<Member> members) {
-                return members.stream().map(member -> TeamController.this.modelMapper.map(member, MemberDTO.class))
-                        .toList();
-            }
-        };
-    }
-
-    private AbstractConverter<List<MemberDTO>, List<Member>> getMemberDTOtoMemberConverter() {
-        return new AbstractConverter<>() {
-            @Override
-            protected List<Member> convert(List<MemberDTO> memberDTOs) {
-                return memberDTOs.stream().map(member -> TeamController.this.modelMapper.map(member, Member.class))
-                        .toList();
-            }
-        };
     }
 
 
@@ -100,7 +70,7 @@ public class TeamController {
         List<MemberDTO> memberDTOS = new ArrayList<>();
 
         for (Member member : members) {
-            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
+            MemberDTO memberDTO = getMapper().map(member, MemberDTO.class);
             memberDTOS.add(memberDTO);
         }
 
@@ -110,7 +80,7 @@ public class TeamController {
 
     @PostMapping("/save")
     public ResponseEntity<TeamDTO> addTeam(@RequestBody TeamDTO teamDTO) {
-        Team mappedTeam = this.modelMapper.map(teamDTO, Team.class);
+        Team mappedTeam = getMapper().map(teamDTO, Team.class);
         this.service.save(mappedTeam);
         return ResponseEntity.status(HttpStatus.CREATED).body(teamDTO);
     }

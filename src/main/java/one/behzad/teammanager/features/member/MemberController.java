@@ -4,30 +4,27 @@ import io.swagger.v3.oas.annotations.Operation;
 import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.models.Member;
 import one.behzad.teammanager.models.StrokeRequest;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static one.behzad.teammanager.utils.Mapper.getMapper;
+import static one.behzad.teammanager.utils.Mapper.membersToMembersDTO;
 
 @RestController
 @RequestMapping("user")
 public class MemberController {
 
     private final MemberService service;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public MemberController(MemberService service, ModelMapper modelMapper) {
+    public MemberController(MemberService service) {
         this.service = service;
-        this.modelMapper = modelMapper;
-        this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
     }
 
 
@@ -37,7 +34,7 @@ public class MemberController {
         Optional<Member> member = this.service.findOneById(id);
 
         return member.map(m -> {
-                    MemberDTO mappedDTO = this.modelMapper.map(m, MemberDTO.class);
+                    MemberDTO mappedDTO = getMapper().map(m, MemberDTO.class);
                     return ResponseEntity.ok().body(mappedDTO);
                 })
                 .orElse(ResponseEntity.notFound().build());
@@ -52,12 +49,7 @@ public class MemberController {
             return ResponseEntity.notFound().build();
         }
 
-        List<MemberDTO> memberDTOS = new ArrayList<>();
-
-        for (Member member : members) {
-            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
-            memberDTOS.add(memberDTO);
-        }
+        List<MemberDTO> memberDTOS = membersToMembersDTO(members);
 
         return ResponseEntity.ok().body(memberDTOS);
     }
@@ -65,7 +57,7 @@ public class MemberController {
 
     @PostMapping("/save")
     public ResponseEntity<MemberDTO> addMember(@RequestBody MemberDTO memberDTO) {
-        Member mappedMember = this.modelMapper.map(memberDTO, Member.class);
+        Member mappedMember = getMapper().map(memberDTO, Member.class);
         this.service.save(mappedMember);
         return ResponseEntity.status(HttpStatus.CREATED).body(memberDTO);
     }
@@ -96,12 +88,7 @@ public class MemberController {
             return ResponseEntity.notFound().build();
         }
 
-        List<MemberDTO> memberDTOS = new ArrayList<>();
-
-        for (Member member : members) {
-            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
-            memberDTOS.add(memberDTO);
-        }
+        List<MemberDTO> memberDTOS = membersToMembersDTO(members);
 
         return ResponseEntity.ok().body(memberDTOS);
     }
@@ -114,12 +101,7 @@ public class MemberController {
             return ResponseEntity.notFound().build();
         }
 
-        List<MemberDTO> memberDTOS = new ArrayList<>();
-
-        for (Member member : members) {
-            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
-            memberDTOS.add(memberDTO);
-        }
+        List<MemberDTO> memberDTOS = membersToMembersDTO(members);
 
         return ResponseEntity.ok().body(memberDTOS);
     }
