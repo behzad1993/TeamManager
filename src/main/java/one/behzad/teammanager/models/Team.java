@@ -26,8 +26,14 @@ public class Team extends BaseEntity {
             },
             mappedBy = "teams")
     @JsonIgnore
+    @ToString.Exclude
     private List<Member> members;
 
 //    @OneToOne
 //    private ImageDB profilePicture;
+
+//    @Override
+//    public String toString() {
+//        return "NOTHING TO SEE HERE FOR THE TEAM";
+//    }
 }

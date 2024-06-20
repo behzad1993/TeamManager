@@ -44,7 +44,7 @@ public class Member extends BaseEntity {
     @OneToOne
     @JoinTable(name = "member_stroke",
             joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "strokes_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "stroke_id", referencedColumnName = "id"))
     private StrokeOrder mainStroke;
 
     public Member(long i, String a, String b) {

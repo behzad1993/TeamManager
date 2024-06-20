@@ -1,6 +1,7 @@
 package one.behzad.teammanager.DTOs;
 
 import lombok.*;
+import one.behzad.teammanager.models.StrokeOrder;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ public class MemberDTO extends TypeReferenceDTO {
     private String lastName;
     private String email;
     private String phoneNr;
+    private StrokeOrder strokeOrder;
     private Date birthday;
 
     public MemberDTO(String surName, String lastName) {

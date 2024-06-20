@@ -1,6 +1,7 @@
 package one.behzad.teammanager.features.member;
 
 import one.behzad.teammanager.models.Member;
+import one.behzad.teammanager.models.Stroke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -29,6 +30,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> findAll() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public List<Member> findAllByStroke(Stroke stroke) {
+        return this.repository.findAllByMainStrokeFirst(stroke);
+    }
+
+    @Override
+    public List<Member> findAllIMSwimmers() {
+        return this.repository.findAllByMainStrokeIsIMSwimmer(true);
     }
 
     @Override

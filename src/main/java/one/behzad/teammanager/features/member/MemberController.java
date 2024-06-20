@@ -3,6 +3,7 @@ package one.behzad.teammanager.features.member;
 import io.swagger.v3.oas.annotations.Operation;
 import one.behzad.teammanager.DTOs.MemberDTO;
 import one.behzad.teammanager.models.Member;
+import one.behzad.teammanager.models.StrokeRequest;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,42 @@ public class MemberController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+
+    @GetMapping("/stroke")
+    public ResponseEntity<List<MemberDTO>> getMembersByStroke(@RequestBody StrokeRequest stroke) {
+        List<Member> members = this.service.findAllByStroke(stroke.stroke());
+
+        if (members.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+
+        for (Member member : members) {
+            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
+            memberDTOS.add(memberDTO);
+        }
+
+        return ResponseEntity.ok().body(memberDTOS);
+    }
+
+    @GetMapping("/im")
+    public ResponseEntity<List<MemberDTO>> getAllIMSwimmer() {
+        List<Member> members = this.service.findAllIMSwimmers();
+
+        if (members.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+
+        for (Member member : members) {
+            MemberDTO memberDTO = this.modelMapper.map(member, MemberDTO.class);
+            memberDTOS.add(memberDTO);
+        }
+
+        return ResponseEntity.ok().body(memberDTOS);
     }
 }
